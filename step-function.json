@@ -1,0 +1,31 @@
+  
+  {
+    "Comment": "Process Payload Workflow",
+    "StartAt": "ProcessInput",
+    "States": {
+      "ProcessInput": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:147726474727:function:stepFunc",
+        "Next": "ValidatePayload",
+        "Catch": [{ "ErrorEquals": ["States.ALL"], "Next": "HandleError" }]
+      },
+      "ValidatePayload": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:147726474727:function:stepFunc",
+        "Next": "ProcessData",
+        "Catch": [{ "ErrorEquals": ["States.ALL"], "Next": "HandleError" }]
+      },
+      "ProcessData": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:147726474727:function:stepFunc",
+        "End": true,
+        "Catch": [{ "ErrorEquals": ["States.ALL"], "Next": "HandleError" }]
+      },
+      "HandleError": {
+        "Type": "Fail",
+        "Error": "CustomError",
+        "Cause": "An error occurred during processing."
+      }
+    }
+  }
+  
