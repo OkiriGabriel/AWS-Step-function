@@ -5,7 +5,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
-def process_input(event, context):
+def lambda_handler(event, context):
     input_payload = event['input_payload']
     # Log start of processing
     logger.info("Starting ProcessInput Lambda function.")
@@ -16,7 +16,7 @@ def process_input(event, context):
     }
 
 
-def validate_payload(event, context):
+def process_handler(event, context):
     processed_data = event['processed_data']
     # Log validation results
     logger.info("Starting ValidatePayload Lambda function.")
@@ -31,7 +31,7 @@ def validate_payload(event, context):
     }
 
 
-def process_data(event, context):
+def validate_handler(event, context):
     validation_result = event['validation_result']
     # Log processing steps
     logger.info("Starting ProcessData Lambda function.")
